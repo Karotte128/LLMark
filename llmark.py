@@ -25,7 +25,7 @@ class LLMark:
 
         return self._eval.evaluate(type, options, resp)
 
-    def run_test_set(self, test_set: dict[str, any]) -> None:
+    def run_test_set(self, test_set: dict[str, any]) -> dict[str, any]:
         if "evaluators" not in test_set or "questions" not in test_set:
             raise ValueError('Test set must contain "evaluators" and "questions".')
 
@@ -40,7 +40,21 @@ class LLMark:
 
         self._eval.load_evaluators(evaluators)
 
+        results: list[any] = []
+        score_collector: int = 0
+        score_counter: int = 0
+
         for question in questions:
-            self._run_test(question)
+            result = self._run_test(question)
+
+            result["question"] = question
+            results.append(result)
+
+            score_collector = score_collector + int(result["score"])
+            score_counter = score_counter + 1
 
         self._eval.unload_evaluators()
+
+        average_score = score_collector / score_counter
+
+        return {"average_score": average_score, "results": results}
