@@ -30,7 +30,7 @@ class MultipleChoicePlugin(Plugin):
     def unload(self):
         pass
 
-    def format_prompt(self, question: str, options: dict[str, any]) -> str:
+    def format_prompt(self, options: dict[str, any], question: str) -> str:
         choices_map = options.get("choices")
         if not isinstance(choices_map, dict) or not choices_map:
             raise ValueError(

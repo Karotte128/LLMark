@@ -86,8 +86,8 @@ class Evaluator:
     def unloadEvaluators(self) -> None:
         self._pm._unload_all()
 
-    def format_prompt(self, formatter: str, question: str, options: dict[str, any]) -> str:
-        return self._pm._format_prompt(formatter, question, options)
+    def format_prompt(self, formatter: str, options: dict[str, any], question: str) -> str:
+        return self._pm._format_prompt(formatter, options, question)
 
     def evaluate(self, evaluator: str, options: dict[str, any], response: str) -> dict[str, any]:
         try:

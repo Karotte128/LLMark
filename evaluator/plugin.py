@@ -18,7 +18,7 @@ class Plugin(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def format_prompt(self, question: str, options: dict[str, any]) -> str:
+    def format_prompt(self, options: dict[str, any], question: str) -> str:
         """
         Formats the prompt so the evaluator can parse the response.
         """

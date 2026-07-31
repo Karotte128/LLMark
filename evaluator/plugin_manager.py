@@ -23,9 +23,9 @@ class _PluginManager:
         for plugin in self._plugins.values():
             plugin.unload()
 
-    def _format_prompt(self, formatter: str, question: str, options: dict[str, any]) -> str:
+    def _format_prompt(self, formatter: str, options: dict[str, any], question: str) -> str:
         try:
-            return self._plugins[formatter].format_prompt(question, options)
+            return self._plugins[formatter].format_prompt(options, question)
         except KeyError as exc:
             raise ValueError(f"Plugin '{formatter}' is not available.") from exc
 
