@@ -52,13 +52,13 @@ class Evaluator:
         ptype = ptype.strip().lower()
         pname = pname.strip()
 
-        if ptype == "ext":
+        if ptype == "external":
             try:
                 plugin = self._ext_plugins[pname]
             except KeyError as exc:
                 raise KeyError(f"No external plugin named '{pname}'.") from exc
 
-        elif ptype == "int":
+        elif ptype == "internal":
             try:
                 plugin = self._int_plugins[pname]
             except KeyError as exc:
@@ -70,7 +70,7 @@ class Evaluator:
         else:
             raise ValueError(
                 f"Unsupported plugin type '{ptype}'. "
-                "Supported source types are 'ext', 'int' and 'file'."
+                "Supported source types are 'external', 'internal' and 'file'."
             )
 
         self._pm._register(alias, plugin)
