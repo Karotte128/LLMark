@@ -1,6 +1,6 @@
 from .plugin_manager import _PluginManager
 from .plugin import Plugin
-from .internal.multiple_choice_evaluator import MultipleChoicePlugin
+from .internal import internal_plugins
 
 from pathlib import Path
 import importlib.util
@@ -9,9 +9,7 @@ class Evaluator:
     def __init__(self, ext_plugins: dict[str, Plugin]) -> None:
         self._pm = _PluginManager()
         self._ext_plugins = ext_plugins
-        self._int_plugins: dict[str, Plugin] = {
-            "multiple-choice": MultipleChoicePlugin()
-        }
+        self._int_plugins = internal_plugins
 
     def _load_from_file(self, pathstr: str) -> Plugin:
 
