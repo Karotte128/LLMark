@@ -41,7 +41,7 @@ class Evaluator:
 
         return plugin
 
-    def _loadEvaluator(self, source: str, alias: str) -> None:
+    def _load_evaluator(self, source: str, alias: str) -> None:
         try:
             ptype, pname = source.split(":", 1)
         except ValueError as exc:
@@ -75,13 +75,13 @@ class Evaluator:
 
         self._pm._register(alias, plugin)
 
-    def loadEvaluators(self, eval_sources: dict[str, str]) -> None:
+    def load_evaluators(self, eval_sources: dict[str, str]) -> None:
         self._pm._unload_all()
         for source, alias in eval_sources.items():
-            self._loadEvaluator(source, alias)
+            self._load_evaluator(source, alias)
         self._pm._load_all()
 
-    def unloadEvaluators(self) -> None:
+    def unload_evaluators(self) -> None:
         self._pm._unload_all()
 
     def format_prompt(self, formatter: str, options: dict[str, any], question: str) -> str:
