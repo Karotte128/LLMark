@@ -31,7 +31,23 @@ class MultipleChoicePlugin(Plugin):
         pass
 
     def format_prompt(self, question: str, options: dict[str, any]) -> str:
-        pass
+        choices_map = options.get("choices")
+        if not isinstance(choices_map, dict) or not choices_map:
+            raise ValueError(
+                "options must contain a non-empty 'choices' dictionary"
+            )
+
+        choices_block = "\n".join(
+            f"{label.upper()}) {text}" for label, text in choices_map.items()
+        )
+
+        prompt = (
+            f"{question}\n\n"
+            f"{choices_block}\n\n"
+            "Answer with just the letter of the correct choice."
+        )
+
+        return prompt
 
     def evaluate(self, options: dict[str, any], response: str) -> dict[str, any]:
         correct = _evaluate_mcq(options, response)
