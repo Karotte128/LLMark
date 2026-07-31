@@ -83,6 +83,9 @@ class Evaluator:
             self._loadEvaluator(source, alias)
         self._pm._load_all()
 
+    def unloadEvaluators(self) -> None:
+        self._pm._unload_all()
+
     def format_prompt(self, formatter: str, question: str, options: dict[str, any]) -> str:
         return self._pm._format_prompt(formatter, question, options)
 
