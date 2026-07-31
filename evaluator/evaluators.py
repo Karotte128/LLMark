@@ -83,5 +83,14 @@ class Evaluator:
             self._loadEvaluator(source, alias)
         self._pm._load_all()
 
-    def evaluate(self, evaluator: str, data: dict[str, any], response: str) -> dict[str, any]:
-        return self._pm._evaluate(evaluator, data, response)
+    def format_prompt(self, formatter: str, question: str, options: dict[str, any]) -> str:
+        return self._pm._format_prompt(formatter, question, options)
+
+    def evaluate(self, evaluator: str, options: dict[str, any], response: str) -> dict[str, any]:
+        try:
+            return self._pm._evaluate(evaluator, options, response)
+        except Exception as exc:
+            return {
+                "score": 0,
+                "reason": "Evalutating resulted in exception: " + str(exc)
+            }

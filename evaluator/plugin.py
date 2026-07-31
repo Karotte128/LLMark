@@ -18,7 +18,14 @@ class Plugin(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def evaluate(self, data: dict[str, any], response: str) -> dict[str, any]:
+    def format_prompt(self, question: str, options: dict[str, any]) -> str:
+        """
+        Formats the prompt so the evaluator can parse the response.
+        """
+        pass
+
+    @abc.abstractmethod
+    def evaluate(self, options: dict[str, any], response: str) -> dict[str, any]:
         """
         Run the evaluator provided by the plugin.
         Returns the evaluated grade in the following format:

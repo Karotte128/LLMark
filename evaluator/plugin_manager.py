@@ -23,8 +23,14 @@ class _PluginManager:
         for plugin in self._plugins.values():
             plugin.unload()
 
-    def _evaluate(self, evaluator: str, data: dict[str, any], response: str) -> dict[str, any]:
+    def _format_prompt(self, formatter: str, question: str, options: dict[str, any]) -> str:
         try:
-            return self._plugins[evaluator].evaluate(data, response)
+            return self._plugins[formatter].format_prompt(question, options)
+        except KeyError as exc:
+            raise ValueError(f"Plugin '{formatter}' is not available.") from exc
+
+    def _evaluate(self, evaluator: str, options: dict[str, any], response: str) -> dict[str, any]:
+        try:
+            return self._plugins[evaluator].evaluate(options, response)
         except KeyError as exc:
             raise ValueError(f"Plugin '{evaluator}' is not available.") from exc
