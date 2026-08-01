@@ -4,11 +4,39 @@ from .evaluator.evaluators import _Evaluator
 from .evaluator.plugin import Plugin
 
 class LLMark:
+    """
+    Core orchestrator for running an LLM benchmark.
+
+    Parameters
+    ----------
+    func : Callable[[str], str]
+        A callable that receives a formatted prompt and returns the raw model
+        response.  This is where you hook your own API / client.
+    base_path : str, optional
+        Directory from which file-based plugins are resolved (default ``"."``).
+    ext_plugins : dict[str, Plugin], optional
+        Mapping of *external* plugin names to already instantiated ``Plugin``
+        objects.
+
+    The class holds a private :class:`_Evaluator` instance that manages loading,
+    formatting and evaluating each question.
+    """
+
     def __init__(self, func: Callable[[str], str], base_path: str = ".", ext_plugins: dict[str, Plugin] = {}):
         self._eval = _Evaluator(base_path, ext_plugins)
         self._chat_func = func
 
     def _run_test(self, test: dict[str, any]) -> dict[str, any]:
+        """
+        Validate a single test description, format the prompt, call the model,
+        and evaluate the response.
+
+        The *test* dict must contain ``type``, ``question`` and ``options``.
+        Raises
+        ------
+        ValueError
+        If required keys are missing or ``options`` is not a mapping.
+        """
         if "type" not in test or "question" not in test or "options" not in test:
             raise ValueError('Test must contain "type", "question" and "options".')
 
@@ -26,6 +54,31 @@ class LLMark:
         return self._eval._evaluate(type, options, resp)
 
     def run_test_set(self, test_set: dict[str, any]) -> dict[str, any]:
+        """
+        Run an entire benchmark.
+
+        The *test_set* must contain:
+        * ``evaluators`` – a mapping of evaluator specifications to aliases.
+        * ``questions``   – a list of question objects as described in the
+            README.
+
+        Returns
+        -------
+        dict
+            {
+                "average_score": float,
+                "results": [
+                    {"question": <original>, "score": int, "reason": str}, …
+                ]
+            }
+
+        Notes
+        -----
+        * All evaluators are loaded, each question is processed (progress printed),
+        then the evaluators are unloaded.
+        * ``average_score`` is computed as the arithmetic mean of all integer scores.
+        """
+
         if "evaluators" not in test_set or "questions" not in test_set:
             raise ValueError('Test set must contain "evaluators" and "questions".')
 

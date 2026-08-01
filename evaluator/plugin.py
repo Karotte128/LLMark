@@ -1,6 +1,16 @@
 import abc
 
 class Plugin(abc.ABC):
+    """
+    Abstract base class that every evaluator plugin must implement.
+
+    Required lifecycle methods:
+        * :meth:`load`   – allocate resources (e.g. DB connections).
+        * :meth:`unload` – clean up those resources.
+        * :meth:`format_prompt` – turn a question + options into the exact prompt string that will be sent to the LLM.
+        * :meth:`evaluate` – score the raw model response and return a dict: {"score": int, "reason": str}
+    """
+
     @abc.abstractmethod
     def load(self) -> None:
         """

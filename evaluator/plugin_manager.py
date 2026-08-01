@@ -1,6 +1,14 @@
 from .plugin import Plugin
 
 class _PluginManager:
+    """
+    Helper that stores and coordinates all loaded plugins.
+
+    It validates type inheritance, prevents duplicate registration,
+    and forwards ``format_prompt`` / ``evaluate`` calls to the appropriate
+    plugin instance.
+    """
+
     def __init__(self) -> None:
         self._plugins: dict[str, Plugin] = {}
 

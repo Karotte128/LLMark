@@ -6,6 +6,18 @@ from pathlib import Path
 import importlib.util
 
 class _Evaluator:
+    """
+    High-level abstraction that loads evaluator specifications, formats prompts, and runs scoring.
+
+    It knows three sources of plugins:
+        * ``internal`` – bundled in :mod:`llmark.evaluator.internal`.
+        * ``external`` – supplied by the user via ``ext_plugins``.
+        * ``file``     – Python files on disk that expose a ``Plugin`` class.
+
+    The public methods are thin wrappers around the internal
+    :class:`_PluginManager`.
+    """
+
     def __init__(self,base_path: str, ext_plugins: dict[str, Plugin]) -> None:
         self._pm = _PluginManager()
         self._ext_plugins = ext_plugins

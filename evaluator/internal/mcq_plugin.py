@@ -1,6 +1,29 @@
 from ..plugin import Plugin
 
 def _evaluate_mcq(payload: dict[str, str], response: str) -> bool:
+    """
+    Evaluate a multiple-choice answer.
+
+    Parameters
+    ----------
+    payload : dict
+        Must contain ``"choices"`` (mapping label → text) and ``"answer"``
+        (the correct label).
+    response : str
+        The raw model output.
+
+    Returns
+    -------
+    bool
+        ``True`` if the normalized response matches the correct answer,
+        otherwise ``False``.
+
+    Raises
+    ------
+    ValueError
+        If required keys are missing or ``choices`` is not a dict.
+    """
+
     if "choices" not in payload or "answer" not in payload:
         raise ValueError('Payload must contain both "choices" and "answer".')
 
@@ -22,15 +45,24 @@ def _evaluate_mcq(payload: dict[str, str], response: str) -> bool:
     return resp_normalised == correct_normalised
 
 class _MultipleChoicePlugin(Plugin):
-    """Multiple Choice Plugin"""
+    """Built-in evaluator for classic multiple-choice questions."""
 
     def load(self):
+        """No external resources needed – method present for API symmetry."""
         pass
 
     def unload(self):
+        """Complement to :meth:`load`; nothing to clean up."""
         pass
 
     def format_prompt(self, options: dict[str, any], question: str) -> str:
+        """
+        Create a LLM-readable prompt.
+
+        * Validates that ``options["choices"]`` is a non-empty dict.
+        * Renders each choice as “A) text”, one per line.
+        * Appends the instruction **“Answer with just the letter of the correct choice.”**
+        """
         choices_map = options.get("choices")
         if not isinstance(choices_map, dict) or not choices_map:
             raise ValueError(
