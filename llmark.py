@@ -44,7 +44,11 @@ class LLMark:
         score_collector: int = 0
         score_counter: int = 0
 
-        for question in questions:
+        total = len(questions)
+
+        for idx, question in enumerate(questions, start=1):
+            print(f"Running test {idx}/{total}")
+
             result = self._run_test(question)
 
             result["question"] = question
