@@ -28,7 +28,7 @@ class Plugin(abc.ABC):
     def evaluate(self, options: dict[str, any], response: str) -> dict[str, any]:
         """
         Run the evaluator provided by the plugin.
-        Returns the evaluated grade in the following format:
-        {"grade": 'float 0-1', reason: 'string'}
+        Returns the evaluated score in the following format:
+        {"score": 'int 0-100', reason: 'string'}
         """
         pass

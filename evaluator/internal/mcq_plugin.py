@@ -22,7 +22,7 @@ def _evaluate_mcq(payload: dict[str, str], response: str) -> bool:
     return resp_normalised == correct_normalised
 
 class _MultipleChoicePlugin(Plugin):
-    """multiple choiche plugin"""
+    """Multiple Choice Plugin"""
 
     def load(self):
         pass

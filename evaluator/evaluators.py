@@ -5,7 +5,7 @@ from .internal import internal_plugins
 from pathlib import Path
 import importlib.util
 
-class Evaluator:
+class _Evaluator:
     def __init__(self,base_path: str, ext_plugins: dict[str, Plugin]) -> None:
         self._pm = _PluginManager()
         self._ext_plugins = ext_plugins
@@ -76,19 +76,19 @@ class Evaluator:
 
         self._pm._register(alias, plugin)
 
-    def load_evaluators(self, eval_sources: dict[str, str]) -> None:
+    def _load_evaluators(self, eval_sources: dict[str, str]) -> None:
         self._pm._unload_all()
         for source, alias in eval_sources.items():
             self._load_evaluator(source, alias)
         self._pm._load_all()
 
-    def unload_evaluators(self) -> None:
+    def _unload_evaluators(self) -> None:
         self._pm._unload_all()
 
-    def format_prompt(self, formatter: str, options: dict[str, any], question: str) -> str:
+    def _format_prompt(self, formatter: str, options: dict[str, any], question: str) -> str:
         return self._pm._format_prompt(formatter, options, question)
 
-    def evaluate(self, evaluator: str, options: dict[str, any], response: str) -> dict[str, any]:
+    def _evaluate(self, evaluator: str, options: dict[str, any], response: str) -> dict[str, any]:
         try:
             return self._pm._evaluate(evaluator, options, response)
         except Exception as exc:
