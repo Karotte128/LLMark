@@ -4,8 +4,8 @@ from .evaluator.evaluators import Evaluator
 from .evaluator.plugin import Plugin
 
 class LLMark:
-    def __init__(self, func: Callable[[str], str], ext_plugins: dict[str, Plugin] = {}):
-        self._eval = Evaluator(ext_plugins)
+    def __init__(self, func: Callable[[str], str], base_path: str = ".", ext_plugins: dict[str, Plugin] = {}):
+        self._eval = Evaluator(base_path, ext_plugins)
         self._chat_func = func
 
     def _run_test(self, test: dict[str, any]) -> dict[str, any]:

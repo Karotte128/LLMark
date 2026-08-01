@@ -6,14 +6,15 @@ from pathlib import Path
 import importlib.util
 
 class Evaluator:
-    def __init__(self, ext_plugins: dict[str, Plugin]) -> None:
+    def __init__(self,base_path: str, ext_plugins: dict[str, Plugin]) -> None:
         self._pm = _PluginManager()
         self._ext_plugins = ext_plugins
         self._int_plugins = internal_plugins
+        self._base_path = base_path
 
-    def _load_from_file(self, pathstr: str) -> Plugin:
-
-        path = Path(pathstr)
+    def _load_from_file(self, file_path: str) -> Plugin:
+        base = Path(self._base_path)
+        path = (base / file_path).resolve()
 
         if not path.exists():
             raise FileNotFoundError(path)
