@@ -78,17 +78,22 @@ A benchmark is a JSON object with two top‑level keys:
 | `evaluators` | Mapping of *evaluator spec* → *alias*. The spec can be **internal** (bundled), **file** (custom plugin, loaded at runtime) or **external** (provided by the project). Example: `"internal:multiple-choice": "mcq"` |
 | `questions`  | List of question objects. Each object must contain:<br>`type` – the evaluator alias to use (e.g., `"mcq"`).<br>`question` – the prompt that will be sent to the model.<br>`options` – a dictionary whose content depends on the evaluator type. For the built‑in *multiple‑choice* evaluator you need `choices` (a dict of label → text) and `answer` (the correct label). |
 
+**List of available evaluators::
+- "internal:multiple-choice"
+- "internal:string"
+
 **Example (`sample_test.json`)**
 
 ```json
 {
   "evaluators": {
-    "internal:multiple-choice": "mcq"
+    "internal:multiple-choice": "mcq",
+    "internal:string": "str"
   },
   "questions": [
     {
       "type": "mcq",
-      "id": "test-01",
+      "id": "mcq-01",
       "question": "What is a car?",
       "options": {
         "choices": {
@@ -98,6 +103,16 @@ A benchmark is a JSON object with two top‑level keys:
           "d": "a color"
         },
         "answer": "a"
+      }
+    },
+    {
+      "type": "str",
+      "id": "str-01",
+      "question": "What is the capital of France?",
+      "options": {
+        "mode": "equals",
+        "target": "Paris",
+        "case_sensitive": false
       }
     }
   ]
