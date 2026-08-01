@@ -82,6 +82,12 @@ class _MultipleChoicePlugin(Plugin):
         return prompt
 
     def evaluate(self, options: dict[str, any], response: str) -> dict[str, any]:
+        """
+        Score a response using :func:`_evaluate_mcq`.
+
+        Returns ``{"score": 100, "reason": ""}`` for a correct answer,
+        otherwise ``{"score": 0, "reason": <explanation>}``.
+        """
         correct = _evaluate_mcq(options, response)
         if correct:
             return {"score": 100, "reason": ""}
