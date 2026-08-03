@@ -33,7 +33,7 @@ class _StringMatchPlugin(Plugin):
     def format_prompt(self, _: Dict[str, Any], question: str) -> str:
         prompt = (
             f"{question}\n\n"
-            "Provide the answer as plain text."
+            "Provide the answer as plain text. Do not include any explanation for your answer."
         )
 
         return prompt

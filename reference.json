@@ -1,0 +1,72 @@
+{
+  "evaluators": {
+    "internal:multiple-choice": "mcq",
+    "internal:string": "str"
+  },
+  "questions": [
+    {
+      "type": "mcq",
+      "id": "mcq-01",
+      "question": "What is a car?",
+      "options": {
+        "choices": {
+          "a": "a vehicle",
+          "b": "a type of food",
+          "c": "an animal",
+          "d": "a color"
+        },
+        "answer": "a"
+      }
+    },
+    {
+      "type": "str",
+      "id": "str-01",
+      "question": "What is the capital of France?",
+      "options": {
+        "mode": "equals",
+        "target": "Paris",
+        "case_sensitive": false
+      }
+    },
+    {
+      "type": "str",
+      "id": "str-02",
+      "question": "List the 5 most popular programming languages",
+      "options": {
+        "mode": "contains",
+        "target": "Python",
+        "case_sensitive": false
+      }
+    },
+    {
+      "type": "str",
+      "id": "str-03",
+      "question": "Describe a clock without mentioning time.",
+      "options": {
+        "mode": "contains_not",
+        "target": "time",
+        "case_sensitive": false
+      }
+    },
+    {
+      "type": "str",
+      "id": "str-04",
+      "question": "Write a sentence that starts with apple.",
+      "options": {
+        "mode": "starts_with",
+        "target": "apple",
+        "case_sensitive": false
+      }
+    },
+    {
+      "type": "str",
+      "id": "str-05",
+      "question": "Write a sentence that ends with carrot.",
+      "options": {
+        "mode": "ends_with",
+        "target": "carrot.",
+        "case_sensitive": false
+      }
+    }
+  ]
+}

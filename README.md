@@ -119,6 +119,9 @@ A benchmark is a JSON object with two top‑level keys:
 }
 ```
 
+
+The file `reference.json` contains a reference of all internal plugins.
+
 ---
 
 ### Running a Benchmark
