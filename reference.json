@@ -3,7 +3,8 @@
     "internal:multiple-choice": "mcq",
     "internal:string": "str",
     "internal:number": "num",
-    "internal:regex": "regex"
+    "internal:regex": "regex",
+    "internal:boolean": "bool"
   },
   "questions": [
     {
@@ -99,6 +100,22 @@
       "options": {
         "regex": "\\d",
         "invert": true
+      }
+    },
+    {
+      "type": "bool",
+      "question": "Is the sky blue?",
+      "options": {
+        "value": true
+      }
+    },
+    {
+      "type": "bool",
+      "question": "Is 1+1=3?",
+      "options": {
+        "value": false,
+        "true_word": "yes",
+        "false_word": "no"
       }
     }
   ]

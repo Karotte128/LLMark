@@ -83,6 +83,7 @@ A benchmark is a JSON object with two top‑level keys:
 - "internal:string"
 - "internal:number"
 - "internal:regex"
+- "internal:boolean"
 
 **Example (`sample_test.json`)**
 
