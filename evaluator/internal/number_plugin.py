@@ -1,4 +1,3 @@
-import math
 from llmark.evaluator.plugin import Plugin
 
 
@@ -19,7 +18,7 @@ class _NumberPlugin(Plugin):
     def unload(self) -> None:
         pass
 
-    def format_prompt(self, options: dict[str, any], question: str) -> str:
+    def format_prompt(self, _: dict[str, any], question: str) -> str:
         """
         Append a short hint about the expected numeric type.
         The evaluator itself does not enforce a specific format; it only

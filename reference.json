@@ -2,7 +2,8 @@
   "evaluators": {
     "internal:multiple-choice": "mcq",
     "internal:string": "str",
-    "internal:number": "num"
+    "internal:number": "num",
+    "internal:regex": "regex"
   },
   "questions": [
     {
@@ -82,6 +83,22 @@
       "question": "What is 9853*4358?",
       "options": {
         "value": 42939374
+      }
+    },
+    {
+      "type": "regex",
+      "question": "Give me a 5 digit number.",
+      "options": {
+        "regex": "^\\d{5}$",
+        "invert": false
+      }
+    },
+    {
+      "type": "regex",
+      "question": "Explain the conversion from Celsius to Farenheit without using any digits. Do not use formatting or special characters.",
+      "options": {
+        "regex": "\\d",
+        "invert": true
       }
     }
   ]
