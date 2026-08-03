@@ -44,6 +44,16 @@
     {
       "type": "str",
       "id": "str-03",
+      "question": "Write a sentence about a snake that does not contain the letter 'e'.",
+      "options": {
+        "mode": "contains_not",
+        "target": ["e", "E"],
+        "word_based": false
+      }
+    },
+    {
+      "type": "str",
+      "id": "str-04",
       "question": "Describe a clock without mentioning time.",
       "options": {
         "mode": "contains_not",
@@ -53,7 +63,7 @@
     },
     {
       "type": "str",
-      "id": "str-04",
+      "id": "str-05",
       "question": "Write a sentence that starts with apple.",
       "options": {
         "mode": "starts_with",
@@ -63,7 +73,7 @@
     },
     {
       "type": "str",
-      "id": "str-05",
+      "id": "str-06",
       "question": "Write a sentence that ends with carrot. Do not include punctuation.",
       "options": {
         "mode": "ends_with",
