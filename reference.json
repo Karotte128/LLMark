@@ -1,7 +1,8 @@
 {
   "evaluators": {
     "internal:multiple-choice": "mcq",
-    "internal:string": "str"
+    "internal:string": "str",
+    "internal:number": "num"
   },
   "questions": [
     {
@@ -61,11 +62,26 @@
     {
       "type": "str",
       "id": "str-05",
-      "question": "Write a sentence that ends with carrot.",
+      "question": "Write a sentence that ends with carrot. Do not include punctuation.",
       "options": {
         "mode": "ends_with",
-        "target": "carrot.",
+        "target": "carrot",
         "case_sensitive": false
+      }
+    },
+    {
+      "type": "num",
+      "question": "What is the value of pi approximated to two decimal places?",
+      "options": {
+        "value": 3.14,
+        "tolerance": 0.01
+      }
+    },
+    {
+      "type": "num",
+      "question": "What is 9853*4358?",
+      "options": {
+        "value": 42939374
       }
     }
   ]

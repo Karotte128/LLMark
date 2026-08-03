@@ -81,30 +81,16 @@ A benchmark is a JSON object with two top‑level keys:
 **List of available evaluators::
 - "internal:multiple-choice"
 - "internal:string"
+- "internal:number"
 
 **Example (`sample_test.json`)**
 
 ```json
 {
   "evaluators": {
-    "internal:multiple-choice": "mcq",
     "internal:string": "str"
   },
   "questions": [
-    {
-      "type": "mcq",
-      "id": "mcq-01",
-      "question": "What is a car?",
-      "options": {
-        "choices": {
-          "a": "a vehicle",
-          "b": "a type of food",
-          "c": "an animal",
-          "d": "a color"
-        },
-        "answer": "a"
-      }
-    },
     {
       "type": "str",
       "id": "str-01",
