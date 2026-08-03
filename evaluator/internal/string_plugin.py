@@ -59,8 +59,7 @@ class _StringMatchPlugin(Plugin):
 
         try:
             if mode == "equals":
-                # Only the first target is considered
-                result = norm_resp == norm_tgts[0]
+                result = norm_resp in norm_tgts
 
             elif mode == "contains":
                 result = any(t in norm_resp for t in norm_tgts)
